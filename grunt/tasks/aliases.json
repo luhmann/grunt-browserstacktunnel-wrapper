@@ -1,0 +1,19 @@
+{
+  "default": [
+    "test"
+  ],
+  "test": [
+    "jshint",
+    "jscs",
+    "mochacov:spec",
+    "mochacov:html"
+  ],
+  "ci-test": [
+    "jshint",
+    "mochacov:spec",
+    "mochacov:ci"
+  ],
+  "dev": [
+    "browserstacktunnel-wrapper"
+  ]
+}
