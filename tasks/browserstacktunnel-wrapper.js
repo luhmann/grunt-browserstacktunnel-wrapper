@@ -31,6 +31,8 @@ module.exports = function(grunt) {
 
         hooker.hook(grunt.fail, 'warn', closeTunnel);
         hooker.hook(grunt.fail, 'fatal', closeTunnel);
+        hooker.hook(grunt.fail, 'error', closeTunnel);
+        hooker.hook(grunt.log, 'fail', closeTunnel);
 
         done();
       }
@@ -43,6 +45,8 @@ module.exports = function(grunt) {
     _tunnel.stop(function(error) {
       hooker.unhook(grunt.fail, 'warn');
       hooker.unhook(grunt.fail, 'fatal');
+      hooker.unhook(grunt.fail, 'error');
+      hooker.unhook(grunt.log, 'fail');
 
       if (error) {
         grunt.log.errorlns('...tunnel could be closed.');
