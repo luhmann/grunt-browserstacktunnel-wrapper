@@ -24,7 +24,9 @@
     "url": "https://github.com/luhmann/grunt-browserstacktunnel-wrapper/issues"
   },
   "homepage": "https://github.com/luhmann/grunt-browserstacktunnel-wrapper",
-  "dependencies": {},
+  "dependencies": {
+    "hooker": "^0.2.3"
+  },
   "devDependencies": {
     "browserstacktunnel-wrapper": "^1.4.0",
     "chai": "^3.0.0",
