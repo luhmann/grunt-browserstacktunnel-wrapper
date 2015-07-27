@@ -1,6 +1,6 @@
 {
   "name": "grunt-browserstacktunnel-wrapper",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A grunt plugin around browserstacktunnel-wrapper.",
   "scripts": {
     "test": "grunt ci-test"
