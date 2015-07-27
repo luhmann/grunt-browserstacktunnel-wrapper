@@ -44,4 +44,5 @@ Or add it to an existing task: `grunt.registerTask('test', ['clean', 'browsersta
 Developing on the task alone is fairly easy just `git clone https://github.com/luhmann/grunt-browserstacktunnel-wrapper.git` then `cd grunt-browserstacktunnel-wrapper`. From there one has to link the package to itself via `npm link && npm link grunt-browserstacktunnel-wrapper` which will allow for calling `grunt dev`. Now just work the `task/webpack-dev-server.js` and check results - feel free to submit a pull-request!
 
 ## Release History
+- 0.0.1 Development Version. Do not use!
 - 1.0.0 Not released yet
