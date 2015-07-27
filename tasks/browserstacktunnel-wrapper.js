@@ -49,7 +49,7 @@ module.exports = function(grunt) {
       hooker.unhook(grunt.log, 'fail');
 
       if (error) {
-        grunt.log.errorlns('...tunnel could be closed.');
+        grunt.log.errorlns('...tunnel could not be closed.');
         grunt.log.error(error);
 
         done(error);
@@ -73,10 +73,12 @@ module.exports = function(grunt) {
         verbose: false
       }),
       done,
-      subTask = this.name.split(':');
+      subTask = this.nameArgs.split(':');
 
     if (subTask.length === 1) { subTask = 'start'; }
     else { subTask = subTask[1]; }
+
+    grunt.log.debug('Selected Sub-Task: ' + subTask);
 
     if (subTask === 'start') {
       done = this.async();
