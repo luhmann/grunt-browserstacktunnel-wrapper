@@ -14,6 +14,7 @@
     "mochacov:ci"
   ],
   "dev": [
-    "browserstacktunnel-wrapper"
+    "browserstacktunnel-wrapper:start",
+    "browserstacktunnel-wrapper:stop"
   ]
 }
