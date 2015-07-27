@@ -31,11 +31,15 @@ In your project's Gruntfile, the `browserstacktunnel-wrapper` task is available 
 You can run `grunt browserstacktunnel-wrapper` standalone
 Or add it to an existing task: `grunt.registerTask('test', ['clean', 'browserstacktunnel-wrapper']);`
 
+Opening a tunnel can be either accomplished by running `browserstacktunnel-wrapper` or `browserstacktunnel-wrapper:start`. Once the tunnel is established it can be closed with `browserstacktunnel-wrapper:stop`. Furthermore, the task hooks into `grunt.fail` while it is open to automatically close the tunnel whenever a task along the way fails.
+
 ### Options
 
 ```javascript
 {
-  // Any configuration the webpack-dev-server itself supports.
+  name: 'localhost',
+  port: 3500,
+  sslFlag: 0
 }
 ```
 
@@ -44,4 +48,4 @@ Or add it to an existing task: `grunt.registerTask('test', ['clean', 'browsersta
 Developing on the task alone is fairly easy just `git clone https://github.com/luhmann/grunt-browserstacktunnel-wrapper.git` then `cd grunt-browserstacktunnel-wrapper`. From there one has to link the package to itself via `npm link && npm link grunt-browserstacktunnel-wrapper` which will allow for calling `grunt dev`. Now just work the `task/webpack-dev-server.js` and check results - feel free to submit a pull-request!
 
 ## Release History
-- 1.0.0 Not released yet
+- 0.0.1 Not released yet

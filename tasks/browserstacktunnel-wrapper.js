@@ -10,48 +10,76 @@ module.exports = function(grunt) {
 
   var
     BrowserStackTunnel = require('browserstacktunnel-wrapper'),
+    hooker = require('hooker'),
+    openTunnel,
+    closeTunnel,
     // sharing this object will only work for sharing it in the same grunt call
     _tunnel = {};
 
-  grunt.registerTask('browserstacktunnel-wrapper', 'Start a BrowserstackTunnel for local testing', function() {
-    var options = this.options({
-        key: '',
-        hosts: [
-            {
-              name: 'localhost',
-              port: 3500,
-              sslFlag: 0
-            }
-        ],
-        verbose: false
-      }),
-      done = this.async();
+  openTunnel = function(options, done) {
+    grunt.log.debug('Establishing tunnel...');
 
     _tunnel = new BrowserStackTunnel(options);
 
-    grunt.log.debug('Establishing tunnel')
     _tunnel.start(function(error) {
       if (error) {
-        grunt.log.errorlns('Tunnel could not be started');
-        done(error);
-      } else {
-        grunt.log.oklns('BrowserStackLocalTunnel established');
-        done();
-      }
-    });
-  });
+        grunt.log.errorlns('...tunnel could not be established.');
 
-  grunt.registerTask('browserstacktunnel-wrapper:stop', 'Stop the Browserstacktunnel', function() {
-    var done = this.async();
-    _tunnel.stop(function(error) {
-      if (error) {
-        grunt.log.errorlns('Tunnel could not be started');
-        grunt.log.error(error);
         done(error);
       } else {
-        grunt.log.oklns('BrowserStackLocalTunnel closed');
+        grunt.log.oklns('...tunnel established successfully.');
+
+        hooker.hook(grunt.fail, 'warn', closeTunnel);
+        hooker.hook(grunt.fail, 'fatal', closeTunnel);
+
         done();
       }
     });
+  };
+
+  closeTunnel = function(done) {
+    grunt.log.debug('Closing tunnel...');
+
+    _tunnel.stop(function(error) {
+      hooker.unhook(grunt.fail, 'warn');
+      hooker.unhook(grunt.fail, 'fatal');
+
+      if (error) {
+        grunt.log.errorlns('...tunnel could be closed.');
+        grunt.log.error(error);
+
+        done(error);
+      } else {
+        grunt.log.oklns('...tunnel closed successfully.');
+
+        done();
+      }
+    });
+  };
+
+  grunt.registerTask('browserstacktunnel-wrapper', 'Start a BrowserstackTunnel for local testing', function() {
+    var
+      options = this.options({
+        key: '',
+        hosts: [{
+          name: 'localhost',
+          port: 3500,
+          sslFlag: 0
+        }],
+        verbose: false
+      }),
+      done,
+      subTask = this.name.split(':');
+
+    if (subTask.length === 1) { subTask = 'start'; }
+    else { subTask = subTask[1]; }
+
+    if (subTask === 'start') {
+      done = this.async();
+      openTunnel(options, done);
+    } else if (subTask === 'stop') {
+      done = this.async();
+      closeTunnel(done);
+    }
   });
 };
