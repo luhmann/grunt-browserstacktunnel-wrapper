@@ -1,6 +1,6 @@
 # grunt-browserstacktunnel-wrapper
 
-> A grunt plugin around browserstacktunnel-wrapper
+> A grunt plugin around [browserstacktunnel-wrapper](https://www.npmjs.com/package/browserstacktunnel-wrapper)
 
 [![Build Status](https://travis-ci.org/luhmann/grunt-browserstacktunnel-wrapper.svg?branch=master)](https://travis-ci.org/luhmann/grunt-browserstacktunnel-wrapper)
 [![Coverage Status](https://coveralls.io/repos/luhmann/grunt-licensy/badge.png)](https://coveralls.io/r/luhmann/grunt-browserstacktunnel-wrapper)
@@ -34,12 +34,29 @@ Or add it to an existing task: `grunt.registerTask('test', ['clean', 'browsersta
 Opening a tunnel can be either accomplished by running `browserstacktunnel-wrapper` or `browserstacktunnel-wrapper:start`. Once the tunnel is established it can be closed with `browserstacktunnel-wrapper:stop`. Furthermore, the task hooks into `grunt.fail` while it is open to automatically close the tunnel whenever a task along the way fails.
 
 ### Options
+Options are identical to those of [browserstacktunnel-wrapper](https://www.npmjs.com/package/browserstacktunnel-wrapper) as they are just handed through.
 
 ```javascript
 {
-  name: 'localhost',
-  port: 3500,
-  sslFlag: 0
+  key: YOUR_KEY,
+  hosts: [{
+    name: 'localhost',
+    port: 8080,
+    sslFlag: 0
+  }], // optionally set hosts
+  osxBin: 'your_bin_dir',
+  linux32Bin: 'your_bin_dir',
+  linux64Bin: 'your_bin_dir',
+  win32Bin: 'your_bin_dir',
+  localIdentifier: 'my_tunnel',
+  v: true,
+  proxyUser: PROXY_USER,
+  proxyPass: PROXY_PASS,
+  proxyPort: PROXY_PORT,
+  proxyHost: PROXY_HOST,
+  force: false,
+  forcelocal: false,
+  onlyAutomate: false,
 }
 ```
 
