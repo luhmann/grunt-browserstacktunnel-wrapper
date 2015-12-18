@@ -6,8 +6,6 @@
 module.exports = function(grunt) {
   'use strict';
 
-  require('global-tunnel').initialize();
-
   var
     BrowserStackTunnel = require('browserstacktunnel-wrapper'),
     hooker = require('hooker'),
@@ -18,7 +16,6 @@ module.exports = function(grunt) {
 
   openTunnel = function(options, done) {
     grunt.log.debug('Establishing tunnel...');
-
     _tunnel = new BrowserStackTunnel(options);
 
     _tunnel.start(function(error) {
