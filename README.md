@@ -66,4 +66,5 @@ Developing on the task alone is fairly easy just `git clone https://github.com/l
 
 ## Release History
 - 0.0.x Development Version. Do not use!
+- 0.0.6 Update dependencies to node 5
 - 1.0.0 Not released yet
