@@ -2,10 +2,9 @@
 * grunt-browserstacktunnel-wrapper
 * https://github.com/luhmann/grunt-browserstacktunnel-wrapper
 */
+'use strict';
 
 module.exports = function(grunt) {
-  'use strict';
-
   var
     BrowserStackTunnel = require('browserstacktunnel-wrapper'),
     hooker = require('hooker'),
